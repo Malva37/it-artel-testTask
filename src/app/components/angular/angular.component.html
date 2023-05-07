@@ -1,0 +1,206 @@
+<ol>
+  <li>Яка різниця між *ngIf і [hidden]?</li>
+  <b>
+    *ngIf - це структурна директива, яка дозволяє додавати чи видаляти елемент з дом-дерева. Коли умова true, елемент з'являється, інакше - він видаляється зі сторінки. Якщо використовувати *ngIf, то дерево DOM буде змінюватися динамічно при зміні значень.
+
+    [hidden] - це атрибут, який приховує елемент, якщо його значення true. Це не змінює дом-дерево, а просто застосовує до нього стилі, які роблять його невидимим для користувача. Якщо використовувати [hidden], то елемент залишається в дереві DOM, але він не відображається.
+
+    Якщо необхідно динамічно змінювати дерево DOM в залежності від умови, краще використати *ngIf. А використання [hidden] корисно, якщо потрібно просто приховати елемент без зміни дерева DOM.
+  </b>
+  <li>Що таке Observable?</li>
+  <b>
+    Observable - це один з основних класів в бібліотеці RxJS, який дозволяє працювати з асинхронними потоками даних(з запитами до сервера).
+
+    Основна відмінність між Observable та іншими асинхронними підходами (такими як Promise) полягає в тому, що Observable повідомляє про декілька значень у межах одного потоку, тоді як Promise повідомляє тільки про одне значення.
+  </b>
+
+  <li>
+      <p>Розглянемо наступний компонент:</p>
+      <pre style="border: 1px solid grey; padding: 10px">
+        <code>
+  import &lt; Component, Input } from '@angular/core';
+
+  @Component(&lt;
+  selector: 'welcome',
+  template: `&lt;h1>Welcome to &lt;&lt;name&lt;&lt;!&lt;/h1>`,
+  styles: [`h1 &lt; font-family: Lato; }`]
+  })
+  export class WelcomeComponent  &lt;
+  @Input() name: string;
+  }
+      </code>
+    </pre>
+      <p>Виберіть правильні твердження про його використання (в іншому шаблоні компонента або модулі).</p>
+      <p>(Виберіть усі прийнятні відповіді.)</p>
+      <ol>
+          <li>&lt;welcome name="TestDome">&lt;/welcome> відображатиме: "Welcome to TestDome!".</li>
+          <li>&lt;welcome>&lt;/welcome> нічого не відображатиме.</li>
+          <li>@NgModule(&lt; declarations: [ WelcomeComponent ] }) export class WelcomeModule &lt;} повідомляє, що компонент привітання належить модулю привітання.</li>
+          <li>&lt;hello name="&lt;&lt; name &lt;&lt;">&lt;/hello> відображатиме: "Welcome to name!".</li>
+      </ol>
+  </li>
+
+  <b>Правильними твердженями будуть перші три варіанти. Останнє твердження не вірне, адже: компонент називається WelcomeComponent, а не HelloComponent, і не має параметру name</b>
+  <li>
+      <p>Розглянемо наступний компонент, який можна використовувати для моделювання тварини та її шуму.</p>
+      <pre style="border: 1px solid grey; padding: 10px">
+        <code>
+  <!-- import {Component, Input, Output} from '@angular/core';
+
+  @Component({
+  selector: 'animal-noise',
+  template: `
+      &lt;span>{{animal}}&lt;/span>
+      &lt;button (click)="makeNoise()">Make noise&lt;/button>
+  `
+  })
+  export class AnimalNoise
+      @Input('animal') animal: string;
+      @Input('noise') noise: string;
+
+      makeNoise()
+          alert(`${this.noise}`); -->
+
+
+      </code>
+    </pre>
+      <p>Виберіть правильні твердження про компонент AnimalNoise.</p>
+      <p>(Виберіть усі прийнятні відповіді.)</p>
+      <ol>
+          <li>Component, Input і Output всі необхідні імпорти цього компонента.</li>
+          <li>При включенні компонента AnimalNoise у шаблон мають бути вказані вхідні дані як тварин, так і шуму.</li>
+          <li>Параметр 'animal' у оголошенні @Input ('animal') не змінює інтерфейс компонента.</li>
+          <li>При включенні до шаблону компонентів компонент AnimalNoise створює діапазон, що містить інтерполіроване ім'я тварин і кнопку, прив'язану до makeNoise().</li>
+          <li>Компонент AnimalNoise може бути включений в інший шаблон за допомогою тега &lt;AnimalNoise>.</li>
+      </ol>
+  </li>
+  <li>
+      <p>Розглянемо наступний модуль програми:</p>
+      <pre style="border: 1px solid grey; padding: 10px">
+        <code>
+  <!-- import { NgModule }             from '@angular/core';
+  import { RouterModule, Routes } from '@angular/router';
+  import { HomeComponent }        from './home.component';
+  import { ItemDetailComponent }  from './item-detail.component';
+  const routes: Routes = [
+      { path: '', redirectTo: '/home', pathMatch: 'full' },
+      { path: 'home',  component: HomeComponent },
+      { path: 'detail/:id', component: ItemDetailComponent, outlet: 'route1' }
+  ];
+  @NgModule({
+      imports: [ RouterModule.forRoot(routes) ],
+      exports: [ RouterModule ]
+  })
+  export class AppRoutingModule {} -->
+      </code>
+    </pre>
+      <p>Які з таких тверджень щодо поведінки маршрутизаторів є правильними?</p>
+      <p>(Виберіть усі прийнятні відповіді.)</p>
+      <ol>
+          <li>Доступ до домашнього компонента можливий лише через перенаправлення кореневої URL-адреси.</li>
+          <li>Параметр id не є обов'язковим, коли виконується виклик / detail / URL.</li>
+          <li>Необов'язкові параметри можуть бути передані до будь-якого компонента через параметри запиту ActivatedRoute.</li>
+          <li>/detail/100 використовуватиме &lt;router-outlet name='route1'> для визначення позиції виду.</li>
+          <li>Route, який перенаправляє на HomeComponent, активується на тих самих маршрутах, якщо властивість pathMatch: 'full' була видалена.</li>
+      </ol>
+  </li>
+  <li>
+      <p>Розглянемо наступні два базові класи, Positionable і Rotatable, і похідний клас MovingObject:</p>
+      <pre style="border: 1px solid grey; padding: 10px">
+        <code>
+  <!-- class Positionable {
+      locationX: number;
+      locationY: number;
+  }
+
+  class Rotatable
+      orientation: number;
+      rotate(orientation: number) {
+          this.orientation += orientation;
+      }
+      align(rotatable: Rotatable) {
+          this.orientation = rotatable.orientation;
+      }
+  }
+
+  class MovingObject implements Positionable, Rotatable {
+      locationX: number = 0;
+      locationY: number = 0;
+      orientation: number = 0;
+      rotate: (orientation: number) => void;
+  }
+
+  applyMixins(MovingObject, [Positionable, Rotatable]);
+  function applyMixins(derivedCtor: any, baseCtors: any[])
+      baseCtors.forEach(baseCtor =>
+          Object.getOwnPropertyNames(baseCtor.prototype).forEach(name => {
+              derivedCtor.prototype[name] = baseCtor.prototype[name];
+          });
+      });
+  }
+
+  let mover = new MovingObject();
+  mover.rotate(30); -->
+      </code>
+    </pre>
+      <p>Виберіть правильні твердження.</p>
+      <p>(Виберіть усі прийнятні відповіді.)</p>
+      <ol>
+          <li>Функція applyMixins застосовує реалізації Positionable і Rotatable до MovingObject.</li>
+          <li>Компілятор TypeScript підкреслить, що властивість "align" відсутня для типу MovingObject.</li>
+          <li>Оскільки MovingObject реалізує Rotatable, виклик mover.rotate(30) нічого не зробить.</li>
+          <li>Клас Positionable можна змінити на інтерфейс без помилок компілятора.</li>
+          <li>Властивості MovingObject необхідні як резервні для задоволення компілятора TypeScript.</li>
+      </ol>
+  </li>
+  <li>
+      <p>Розглянемо такі компоненти:</p>
+      <pre style="border: 1px solid grey; padding: 10px">
+        <code>
+  <!-- export class Address {
+      street: String;
+      city: String;
+      zipCode: String;
+  }
+
+  @Component({
+      selector: 'app-address',
+      templateUrl: './address.component.html',
+      styleUrls: ['./address.component.css']
+  })
+  export class AddressComponent implements OnInit
+
+      @Input() address: Address;
+      constructor() { }
+
+      ngOnInit() {
+
+      }
+  }
+
+  @Component({
+      selector: 'app-address-list',
+      templateUrl: './address-list.component.html',
+      styleUrls: ['./address-list.component.css']
+  })
+  export class AddressListComponent implements OnInit {
+
+      @Input() addresses: Address[];
+      constructor() { }
+
+      ngOnInit() {
+
+      }
+  } -->
+      </code>
+    </pre>
+      <p>Нижче наведено файл address-list.component.html. Заповніть пробіли, щоб шаблон відображав один елемент li на адресу, і коректно пов'язував кожну адресу з полем AddressComponent.</p>
+      <pre style="border: 1px solid grey; padding: 10px"><code>
+  &lt;ul>
+      &lt;li <input type="text"/>="let address of <input type="text"/>">
+          &lt;app-address <input type="text"/>="address">&lt;/app-address>
+      &lt;/li>
+  &lt;/ul>
+      </code></pre>
+  </li>
+</ol>

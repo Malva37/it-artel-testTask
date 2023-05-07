@@ -1,0 +1,143 @@
+<ol>
+  <li>Що таке файл package.json?</li>
+  <b>package.json - це файл, що містить інформацію про Node.js проект та його залежності. Він містить різноманітні
+    метадані про проект, такі як: назва, версія, автор, ліцензія, скрипти, залежності та багато іншого.
+
+    Цей файл також дозволяє здійснювати встановлення та керування залежностями проекту. Коли виконується команда npm
+    install в директорії проекту, використовуючи package.json, npm автоматично завантажує та встановлює всі залежності
+    проекту.
+
+    також там иожна прописати скрипти, які можна виконувати з командного рядка, наприклад, запуск тестів або збирання
+    проекту.</b>
+
+  <li>Які є типи запитів HTTP?</li>
+  <b>
+    <ul>
+      <li>
+        GET-запит передає дані через URL-адресу та використовується для отримання HTML-сторінок, зображень, іншого
+        контенту.
+      </li>
+
+      <li>
+        POST-запит передає дані у тілі запиту та зазвичай використовується для створення нових ресурсів, оновлення
+        існуючих даних або відправки форм.
+      </li>
+
+      <li>
+        PUT-запит передає дані у тілі запиту та зазвичай використовується для оновлення даних.
+      </li>
+      <li>
+        DELETE-запит передає дані у тілі запиту та використовується для видалення даних.
+      </li>
+      <li>
+        PATCH-запит передає дані у тілі запиту та зазвичай використовується для оновлення частини даних в ресурсі.
+      </li>
+    </ul>
+  </b>
+
+  <li>Поясніть різницю між локальним і глобальним встановленням пакетів npm</li>
+  <b>
+    Глобальне встановлення пакетів npm означає, що пакет буде доступний для всіх проектів на комп'ютері.
+
+    Локальне встановлення пакетів npm означає, що пакет буде доступний лише для проекту, в якому він встановлений.
+  </b>
+
+  <li>Поясніть порядок виконання прослуховувачів подій у Node.js. Що буде результатом цього коду і чому?
+
+    Розглянемо цей код:
+    <pre style="border: 1px solid grey; padding: 10px">
+      <code>
+    import &lt; EventEmitter } from 'events';
+    const eventEmitter = new EventEmitter();
+
+    eventEmitter.on('myEvent', (data) => &lt;
+        console.log(data, '- FIRST');
+    });
+
+    console.log('Statement A');
+
+    eventEmitter.on("myEvent", data => &lt;
+        console.log(data, '- SECOND');
+    });
+
+    eventEmitter.emit('myEvent', 'Emitted Statement');
+
+    console.log("Statement B");
+</code>
+</pre>
+  </li>
+  <b>
+    Консоль буде виглядати наступним чином:
+    <pre>
+      <code>
+        Statement A
+        Emitted Statement - FIRST
+        Emitted Statement - SECOND
+        Statement B
+      </code>
+    </pre>
+    Вивід "Statement A№ відбудеться першим, адже  цей рядок є синхронним і знаходиться перед реєстрацією подій.
+    Згодом відбудеться
+    вивід  "Emitted Statement - FIRST
+    Emitted Statement - SECOND", тому що всі прослуховувачі події myEvent виконуються послідовно зареєстрованим порядком.
+    Після цього буде виведений рядок "Statement B", оскільки цей рядок є також синхронним і знаходиться після виклику eventEmitter.emit().
+  </b>
+
+  <li>Поясніть, що не так із використанням async/await у циклі forEach. Чи працює він належним чином? Ви можете це
+    виправити?
+    Розглянемо цей код:
+    <pre style="border: 1px solid grey; padding: 10px">
+      <code>
+    import fs from 'fs-promise'
+
+    async function printFiles ()
+    const files = await getFilePaths() // Assume this works fine
+
+    files.forEach(async (file) => &lt;
+        const contents = await fs.readFile(file, 'utf8')
+        console.log(contents)
+    })
+    }
+
+    printFiles()
+</code>
+</pre>
+  </li>
+  <b>Головна проблема в тому, що цикл forEach не очікує на Promise. Потрібно переписати код в середина функції 'printFiles' на наступний:
+    <pre>
+      <code>
+        for (const file of files) &lt;
+          const contents = await fs.readFile(file, 'utf8')
+          console.log(contents)
+        }
+      </code>
+    </pre>
+  </b>
+
+  <li>Що саме робить module.exports у Node.js і яким би був простий приклад?</li>
+  <b>
+    'module.exports' є об'єктом в Node.js, який використовується для встановлення зв'язку між файлами модулів Node.js.
+    Ось приклад використання:
+  </b>
+  <p>
+    у файлі, що експортує:
+  </p>
+  <pre>
+    <code>
+      function add(a, b) &lt;
+        return a + b;
+      }
+      module.exports = add;
+    </code>
+  </pre>
+  <p>
+      у файлі, що імпортує:
+  </p>
+  <pre>
+    <code>
+      const add = require('./add');
+      const sum = add(2, 3);
+      console.log(sum); // 5
+    </code>
+</pre>
+</ol>
