@@ -45,7 +45,6 @@ const routes: Routes = [
     BrowserModule,
     AppRoutingModule,
     RouterModule.forRoot(routes),
-    RouterModule,
     MatToolbarModule,
     MatButtonModule,
     BrowserAnimationsModule,

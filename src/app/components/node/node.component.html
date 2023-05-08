@@ -47,16 +47,16 @@
     Розглянемо цей код:
     <pre style="border: 1px solid grey; padding: 10px">
       <code>
-    import &lt; EventEmitter } from 'events';
+    import &#123; EventEmitter } from 'events';
     const eventEmitter = new EventEmitter();
 
-    eventEmitter.on('myEvent', (data) => &lt;
+    eventEmitter.on('myEvent', (data) =>  &#123;
         console.log(data, '- FIRST');
     });
 
     console.log('Statement A');
 
-    eventEmitter.on("myEvent", data => &lt;
+    eventEmitter.on("myEvent", data => &#123;
         console.log(data, '- SECOND');
     });
 
@@ -76,11 +76,13 @@
         Statement B
       </code>
     </pre>
-    Вивід "Statement A№ відбудеться першим, адже  цей рядок є синхронним і знаходиться перед реєстрацією подій.
+    Вивід "Statement A№ відбудеться першим, адже цей рядок є синхронним і знаходиться перед реєстрацією подій.
     Згодом відбудеться
-    вивід  "Emitted Statement - FIRST
-    Emitted Statement - SECOND", тому що всі прослуховувачі події myEvent виконуються послідовно зареєстрованим порядком.
-    Після цього буде виведений рядок "Statement B", оскільки цей рядок є також синхронним і знаходиться після виклику eventEmitter.emit().
+    вивід "Emitted Statement - FIRST
+    Emitted Statement - SECOND", тому що всі прослуховувачі події myEvent виконуються послідовно зареєстрованим
+    порядком.
+    Після цього буде виведений рядок "Statement B", оскільки цей рядок є також синхронним і знаходиться після виклику
+    eventEmitter.emit().
   </b>
 
   <li>Поясніть, що не так із використанням async/await у циклі forEach. Чи працює він належним чином? Ви можете це
@@ -93,7 +95,7 @@
     async function printFiles ()
     const files = await getFilePaths() // Assume this works fine
 
-    files.forEach(async (file) => &lt;
+    files.forEach(async (file) => &#123;
         const contents = await fs.readFile(file, 'utf8')
         console.log(contents)
     })
@@ -103,10 +105,11 @@
 </code>
 </pre>
   </li>
-  <b>Головна проблема в тому, що цикл forEach не очікує на Promise. Потрібно переписати код в середина функції 'printFiles' на наступний:
+  <b>Головна проблема в тому, що цикл forEach не очікує на Promise. Потрібно переписати код в середина функції
+    'printFiles' на наступний:
     <pre>
       <code>
-        for (const file of files) &lt;
+        for (const file of files) &#123;
           const contents = await fs.readFile(file, 'utf8')
           console.log(contents)
         }
@@ -124,14 +127,14 @@
   </p>
   <pre>
     <code>
-      function add(a, b) &lt;
+      function add(a, b)  &#123;
         return a + b;
       }
       module.exports = add;
     </code>
   </pre>
   <p>
-      у файлі, що імпортує:
+    у файлі, що імпортує:
   </p>
   <pre>
     <code>
